@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="transition-overlay"></div>
+    <header>
+        <h1><span class="red">T</span><span class="white">ajbid.</span></h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="skills.html">Skills</a>
+            <a href="services.html">Services</a>
+            <a href="works.html">Works</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <div class="page-content"></div>
+    <section id="works" class="section active">
+        <h2 class="white-heading">My Works</h2>
+        <div class="work-container">
+            <div class="work-card">
+                <i class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 3h6v2H9z"></path>
+                        <path d="M4 7h16v10H4z"></path>
+                        <path d="M9 21h6v-2H9z"></path>
+                    </svg>
+                </i>
+                <h3>Project </h3>
+                <p> A modern user authentication admin and user panel.</p>
+                <a href="#" class="learn-more" onclick="showProjectImage(event, 'tt.jpg')">View Project</a>
+                <div class="image-container">
+                    <img src="" alt="Project 1">
+                </div>
+            </div>
+            <div class="work-card">
+                <i class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 3h6v2H9z"></path>
+                        <path d="M4 7h16v10H4z"></path>
+                        <path d="M9 21h6v-2H9z"></path>
+                    </svg>
+                </i>
+                <h3>Ui design of the project </h3>
+                <p>Budeget Tracking System where government can allocate budget in deifferent type of sector to initialize there desired budget.</p>
+                <a href="#" class="learn-more" onclick="showProjectImage(event, 'ttt.png')">View Project</a>
+                <div class="image-container">
+                    <img src="" alt="Project 2">
+                </div>
+            </div>
+            <div class="work-card">
+                <i class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 3h6v2H9z"></path>
+                        <path d="M4 7h16v10H4z"></path>
+                        <path d="M9 21h6v-2H9z"></path>
+                    </svg>
+                </i>
+                <h3>Showcase</h3>
+                <p>App development involves designing and building software applications for platforms like mobile, web, or desktop. It combines coding, user interface design, and functionality testing to create user-friendly solutions.</p>
+                <a href="#" class="learn-more" onclick="showProjectImage(event, 'ui.jpeg')">View Project</a>
+                <div class="image-container">
+                    <img src="" alt="Project 3">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function showProjectImage(event, imageName) {
+            event.preventDefault(); // Prevent default link behavior
+
+            // Get the parent card of the clicked button
+            const workCard = event.target.closest('.work-card');
+            const imageContainer = workCard.querySelector('.image-container');
+            const img = imageContainer.querySelector('img');
+
+            // Update the image source dynamically
+            img.src = imageName;
+
+            // Toggle the 'active' class to trigger animation
+            if (imageContainer.classList.contains('active')) {
+                imageContainer.classList.remove('active');
+            } else {
+                imageContainer.classList.add('active');
+            }
+        }
+    </script>
+    <footer>
+        <p>&copy; 2024 Tajbid. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const content = document.querySelector('.page-content');
+            content.classList.add('visible');
+
+            document.querySelectorAll('a[data-transition]').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = e.target.href;
+                    
+                    const overlay = document.querySelector('.transition-overlay');
+                    overlay.classList.add('active');
+
+                    setTimeout(() => {
+                        window.location.href = target;
+                    }, 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

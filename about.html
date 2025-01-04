@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="transition-overlay"></div>
+    
+    <header>
+        <h1><span class="red">T</span><span class="white">ajbid.</span></h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="skills.html">Skills</a>
+            <a href="services.html">Services</a>
+            <a href="works.html">Works</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <div class="page-content"></div>
+    <section id="about" class="section active">
+        <div class="about-content">
+            <img src="tttt.jpg" alt="Profile Image" class="about-img">
+            <div class="about-text">
+                <h3>About Me</h3>
+                <p>
+                    I am a dynamic Computer Science Engineering student at Daffodil International University,
+                    passionate about leveraging technology to solve real-world problems. I identify as a problem solver
+                    and am actively seeking internship or entry-level opportunities in the tech field.
+                </p>
+                <p>
+                    With a strong foundation in programming languages such as C, C++, Java, JavaScript, HTML, and CSS,
+                    I am particularly drawn to UI/UX design and web development. My goal is to contribute effectively
+                    to a team while continuing to grow as a computer scientist.
+                </p>
+            </div>
+        </div>
+        
+        <div class="education-toggle">
+            <button onclick="toggleEducation()" class="education-btn">View Education Details</button>
+        </div>
+        
+        <div id="educationDetails" class="education-details">
+            <div class="education-item">
+                <h4>Secondary School Certificate</h4>
+                <p>Bhairab Govt KB High School</p>
+                <p>GPA: 5.00/5.00 | Graduated: 2019</p>
+            </div>
+            <div class="education-item">
+                <h4>Higher Secondary School Certificate</h4>
+                <p>Hamdard Public College</p>
+                <p>GPA: 5.00/5.00 | Graduated: 2021</p>
+            </div>
+            <div class="education-item">
+                <h4>Bachelor of Science in Computer Science & Engineering</h4>
+                <p>Daffodil International University</p>
+                <p>Currently Studying | Enrolled: 2022</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleEducation() {
+            const educationDetails = document.getElementById('educationDetails');
+            const button = event.target;
+            
+            if (educationDetails.classList.contains('show')) {
+                educationDetails.classList.remove('show');
+                button.textContent = 'View Education Details';
+            } else {
+                educationDetails.classList.add('show');
+                button.textContent = 'Hide Education Details';
+            }
+        }
+    </script>
+    <footer>
+        <p>&copy; 2024 Tajbid. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const content = document.querySelector('.page-content');
+            content.classList.add('visible');
+
+            document.querySelectorAll('a[data-transition]').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = e.target.href;
+                    
+                    const overlay = document.querySelector('.transition-overlay');
+                    overlay.classList.add('active');
+
+                    setTimeout(() => {
+                        window.location.href = target;
+                    }, 600);
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

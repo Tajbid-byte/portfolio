@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="transition-overlay"></div>
+    <header>
+        <h1><span class="red">T</span><span class="white">ajbid.</span></h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="skills.html">Skills</a>
+            <a href="services.html">Services</a>
+            <a href="works.html">Works</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <div class="page-content"></div>
+    <section id="contact" class="section active">
+        <h2 class="white-heading">Contact Me</h2>
+        <div class="contact-container">
+            <form class="contact-form" id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <p>
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+8801795845593">+880 179 584 5593</a>
+                </p>
+                <p>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:mashfiquzzamantajbid@gmail.com">mashfiquzzamantajbid@gmail.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Tajbid. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const content = document.querySelector('.page-content');
+            content.classList.add('visible');
+
+            // Form submission handler
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Replace this URL with your Google Apps Script URL
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbzHdfAV8-MnklRha3_brjbk992zA7_aX2urT2OLTcjw5F5Yi2jAHNGC370n8ZWFiT6H/exec';
+                
+                try {
+                    const formData = new FormData(form);
+                    const response = await fetch(scriptURL, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (response.ok) {
+                        alert('Message sent successfully!');
+                        form.reset();
+                    } else {
+                        throw new Error('Failed to send message');
+                    }
+                } catch (error) {
+                    alert('Error sending message. Please try again.');
+                    console.error('Error:', error);
+                }
+            });
+
+            // Page transition
+            document.querySelectorAll('a[data-transition]').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = e.target.href;
+                    
+                    const overlay = document.querySelector('.transition-overlay');
+                    overlay.classList.add('active');
+
+                    setTimeout(() => {
+                        window.location.href = target;
+                    }, 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

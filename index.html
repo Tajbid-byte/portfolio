@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="transition-overlay"></div>
+    
+    <header>
+        <h1><span class="red">T</span><span class="white">ajbid.</span></h1>
+        <nav>
+            <a href="index.html" data-transition>Home</a>
+            <a href="about.html" data-transition>About</a>
+            <a href="skills.html" data-transition>Skills</a>
+            <a href="services.html" data-transition>Services</a>
+            <a href="works.html" data-transition>Works</a>
+            <a href="contact.html" data-transition>Contact</a>
+        </nav>
+    </header>
+
+    <div class="page-content">
+        <div class="ticker-container">
+            <div class="ticker">
+                <span class="ticker-item">Make Budget-Tracking Application</span>
+                <span class="ticker-item">Library-Management System</span>
+                <span class="ticker-item">Build your Website</span>
+                <span class="ticker-item">Feel free to contact me for more details about these.</span>
+            </div>
+        </div>
+
+
+    <section id="home" class="section active">
+        <div class="intro-text">
+            <h3>UI/UX/Web/App Designer</h3>
+            <h2>Hi, I'm</h2>
+            <h4>Mashfiquzzaman <span class="red">TAJBID</span></h4>
+            <p>From Bangladesh</p>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <h2 class="stat-number">7</h2>
+                    <p class="stat-label">Months<br/>EXPERIENCE</p>
+                </div>
+                <div class="stat-box">
+                    <h2 class="stat-number">+2</h2>
+                    <p class="stat-label">CLIENTS<br/>WORLDWIDE</p>
+                </div>
+                <div class="stat-box">
+                    <h2 class="stat-number">+5</h2>
+                    <p class="stat-label">TOTAL<br/>PROJECTS</p>
+                </div>
+            </div>
+            
+            <div class="work-together">
+                <a href="contact.html">
+                    <span>Let's</span>
+                    <span>work <span class="highlight">together.</span></span>
+                </a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="https://www.facebook.com/tajbid.mashfiquzzaman" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/t_a_j_b_i_d/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/mashfiquzzaman-tajbid" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://x.com/Tajbid14?t=gk5K0JkfuiUyhakXy2xzIQ&s=09" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="cv-Resume">
+                <a href="Tajbid.pdf" Resume>
+                    <i class="fas fa-file-download"></i> CV Resume
+                </a>
+            </div>
+        </div>
+        <div class="profile-img-container">
+            <div class="profile-img-border"></div>
+            <img src="photo.jpg" alt="Profile Picture" class="profile-img">
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Tajbid. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const content = document.querySelector('.page-content');
+            content.classList.add('visible');
+
+            document.querySelectorAll('a[data-transition]').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = e.target.href;
+                    
+                    const overlay = document.querySelector('.transition-overlay');
+                    overlay.classList.add('active');
+
+                    setTimeout(() => {
+                        window.location.href = target;
+                    }, 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
