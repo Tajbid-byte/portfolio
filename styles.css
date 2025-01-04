@@ -1129,6 +1129,27 @@ footer {
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+    .ticker-container {
+        padding: 1rem 0.5rem; /* Adjust padding for smaller screens */
+        margin-top: 1rem;
+    }
+
+    .ticker {
+        white-space: nowrap;
+        animation: ticker 15s linear infinite; /* Speed up animation for smaller screens */
+        display: block; /* Ensure it remains a block element for better handling */
+        text-align: center;
+    }
+
+    .ticker-item {
+        display: inline-block;
+        padding: 0 1rem; /* Reduce padding for smaller screens */
+        font-size: 0.8rem; /* Slightly smaller font for better fit */
+    }
+
+    .ticker-item::after {
+        margin-left: 1rem; /* Reduce spacing between items */
+    }
     .stats-container {
         display: flex;
         flex-direction: column; /* Stack the stat boxes vertically */
