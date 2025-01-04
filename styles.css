@@ -1129,6 +1129,31 @@ footer {
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+    .stats-container {
+        display: flex;
+        flex-direction: column; /* Stack the stat boxes vertically */
+        align-items: center; /* Center align the stats */
+        gap: 20px; /* Add spacing between the stat boxes */
+        margin-top: 20px;
+    }
+
+    .stat-box {
+        width: 80%; /* Make each stat box take up a reasonable width */
+        text-align: center; /* Ensure text is centered */
+        padding: 15px; /* Add padding for a better appearance */
+        background-color: #e08888; /* Optional: Background color for better contrast */
+        border-radius: 10px; /* Optional: Rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Shadow effect */
+    }
+
+    .stat-number {
+        font-size: 2em; /* Adjust font size for smaller screens */
+        color: #e71a08; /* Highlighted color */
+    }
+
+    .stat-label {
+        font-size: 1em; /* Adjust label font size */
+    }
     header {
         flex-direction: column;
     }
@@ -1144,7 +1169,7 @@ footer {
         margin: 5px 10px;
         font-size: 1em;
     }
-
+    
     .section.active {
         flex-direction: column;
         text-align: center;
