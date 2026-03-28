@@ -67,20 +67,55 @@ nav a::after{
 nav a:hover,nav a.active{color:#fff}
 nav a:hover::after,nav a.active::after{width:55%}
 
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:1002}
-.hamburger span{display:block;width:24px;height:2px;background:#fff;transition:all .3s;border-radius:2px}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:8px;z-index:1002;border-radius:10px;
+  border:1px solid var(--border);background:var(--glass);
+  backdrop-filter:blur(10px);transition:all .3s;
+}
+.hamburger:hover{border-color:var(--border2);background:rgba(29,233,182,.08)}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:all .3s;border-radius:2px}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:var(--coral)}
-.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:var(--coral)}
 
 .mobile-nav{
   display:none;position:fixed;inset:0;
-  background:rgba(2,8,24,0.98);backdrop-filter:blur(30px);
-  z-index:1001;flex-direction:column;align-items:center;justify-content:center;gap:34px;
+  background:rgba(2,8,24,0.97);backdrop-filter:blur(40px);
+  z-index:1001;flex-direction:column;align-items:center;justify-content:center;gap:0;
 }
-.mobile-nav.open{display:flex}
-.mobile-nav a{color:var(--muted);text-decoration:none;font-size:1.7rem;font-family:var(--fd);font-weight:700;transition:color .3s,text-shadow .3s}
-.mobile-nav a:hover{color:var(--cyan);text-shadow:var(--gt)}
+.mobile-nav.open{display:flex;animation:fadeUp .3s ease}
+.mob-nav-logo{
+  font-family:var(--fd);font-size:2rem;font-weight:900;
+  margin-bottom:48px;text-decoration:none;
+}
+.mob-nav-logo .lt{color:var(--coral)}
+.mob-nav-logo .lr{color:#fff}
+.mob-link{
+  color:var(--muted);text-decoration:none;
+  font-size:1.6rem;font-family:var(--fd);font-weight:700;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 40px;width:100%;max-width:320px;
+  border-radius:16px;transition:all .3s;
+  letter-spacing:-.5px;
+}
+.mob-link i{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--glass);border:1px solid var(--border);
+  font-size:1rem;flex-shrink:0;transition:all .3s;
+}
+.mob-link:hover,.mob-link.mob-active{
+  color:#fff;background:rgba(29,233,182,.06);
+}
+.mob-link:hover i,.mob-link.mob-active i{
+  background:rgba(29,233,182,.12);border-color:var(--border2);color:var(--cyan);
+}
+.mob-nav-footer{
+  position:absolute;bottom:32px;
+  font-family:var(--fm);font-size:0.68rem;color:var(--dim);
+  letter-spacing:.12em;text-transform:uppercase;
+}
 
 /* TICKER */
 .ticker-wrap{
@@ -100,6 +135,47 @@ nav a:hover::after,nav a.active::after{width:55%}
 .ticker-highlight::before{color:var(--coral)!important}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .proj-list li strong{color:var(--cyan);font-weight:600}
+
+/* Deployment items */
+.deploy-item{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 14px;margin-bottom:8px;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;
+  transition:background .25s,border-color .25s,transform .25s;
+}
+.deploy-item:last-child{margin-bottom:0}
+.deploy-item:hover{background:rgba(29,233,182,.05);border-color:rgba(29,233,182,.2);transform:translateX(4px)}
+.deploy-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.deploy-dot{
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+  background:var(--cyan);box-shadow:0 0 8px var(--cyan);
+  animation:pulse 2.5s ease-in-out infinite;
+}
+.deploy-icon{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:rgba(29,233,182,.08);border:1px solid rgba(29,233,182,.2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--cyan);font-size:.85rem;transition:all .3s;
+}
+.deploy-item:hover .deploy-icon{background:rgba(29,233,182,.15);box-shadow:0 0 12px rgba(29,233,182,.25)}
+.deploy-info{min-width:0;flex:1}
+.deploy-title{font-size:.82rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deploy-sub{font-size:.7rem;color:var(--dim);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deploy-btn{
+  display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+  padding:7px 14px;border-radius:50px;
+  background:linear-gradient(135deg,rgba(255,107,107,.12),rgba(29,233,182,.08));
+  border:1px solid rgba(29,233,182,.25);
+  color:var(--cyan);font-size:.72rem;font-weight:600;
+  text-decoration:none;letter-spacing:.04em;text-transform:uppercase;
+  transition:all .3s;white-space:nowrap;
+}
+.deploy-btn:hover{
+  background:linear-gradient(135deg,var(--coral),#ff8c42);
+  border-color:transparent;color:#fff;
+  box-shadow:0 6px 20px rgba(255,107,107,.4);transform:translateY(-1px);
+}
+.deploy-btn i{font-size:.65rem}
 
 /* Showcase project items */
 .sc-item{
@@ -392,7 +468,7 @@ section{position:relative;z-index:1;padding:130px 80px 90px;min-height:100vh;dis
 .cert-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
 .cert-header-icon{font-size:2rem;color:var(--gold);filter:drop-shadow(0 0 10px rgba(251,191,36,0.5))}
 .cert-header h4{font-family:var(--fd);font-size:1.25rem;font-weight:900;color:#fff;margin-bottom:3px}
-.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .cert-card{display:flex;flex-direction:column;align-items:center;gap:10px}
 .cert-img-wrap{
   position:relative;border-radius:12px;overflow:hidden;
@@ -435,100 +511,117 @@ section{position:relative;z-index:1;padding:130px 80px 90px;min-height:100vh;dis
 .cert-modal-close:hover{background:var(--coral);border-color:var(--coral)}
 
 /* ══════════════════════════════════════════
-   SKILLS — Completely redesigned
+   SKILLS — Multi-category redesign
 ══════════════════════════════════════════ */
 #skills{background:linear-gradient(180deg,transparent,rgba(4,18,48,.6),transparent)}
 
-/* Tab switcher */
+/* Category tab bar */
 .skill-tabs{
-  display:flex;gap:8px;justify-content:center;margin-bottom:48px;
-  background:var(--glass);border:1px solid var(--border);border-radius:50px;
-  padding:6px;max-width:400px;margin-left:auto;margin-right:auto;
+  display:flex;gap:6px;justify-content:center;margin-bottom:44px;
+  flex-wrap:wrap;
 }
 .skill-tab{
-  flex:1;padding:10px 24px;border:none;background:transparent;
-  color:var(--muted);font-family:var(--fb);font-size:0.82rem;font-weight:500;
+  padding:9px 20px;border:1px solid var(--border);background:var(--glass);
+  color:var(--muted);font-family:var(--fb);font-size:0.76rem;font-weight:500;
   letter-spacing:0.06em;border-radius:50px;cursor:pointer;transition:all .3s;
+  display:inline-flex;align-items:center;gap:7px;
 }
-.skill-tab.active{background:linear-gradient(135deg,var(--coral),#ff8c42);color:#fff;box-shadow:0 4px 20px rgba(255,107,107,.4)}
-.skill-tab:not(.active):hover{color:#fff}
+.skill-tab.active{
+  background:linear-gradient(135deg,var(--coral),#ff8c42);
+  border-color:transparent;color:#fff;
+  box-shadow:0 4px 20px rgba(255,107,107,.4);
+}
+.skill-tab:not(.active):hover{color:#fff;border-color:var(--border2)}
 
 .skill-panel{display:none}
-.skill-panel.active{display:block}
+.skill-panel.active{display:block;animation:fadeUp .4s ease}
 
-/* Hexagon tech grid */
+/* Category section header */
+.cat-header{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:24px;padding-bottom:14px;
+  border-bottom:1px solid var(--border);
+}
+.cat-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.cat-icon.coral{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);color:var(--coral)}
+.cat-icon.cyan{background:rgba(29,233,182,.1);border:1px solid rgba(29,233,182,.2);color:var(--cyan)}
+.cat-icon.gold{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);color:var(--gold)}
+.cat-title{font-family:var(--fd);font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:-.3px}
+.cat-sub{font-size:0.75rem;color:var(--dim);font-family:var(--fm);margin-top:2px}
+
+/* Tech card grid */
 .tech-grid{
-  display:flex;flex-wrap:wrap;gap:16px;
-  justify-content:center;max-width:900px;margin:0 auto;
+  display:flex;flex-wrap:wrap;gap:14px;
+  justify-content:center;max-width:1000px;margin:0 auto 16px;
 }
 .tech-card{
   position:relative;
-  background:var(--glass);border:1px solid var(--border);border-radius:20px;
-  padding:28px 20px;width:130px;
-  display:flex;flex-direction:column;align-items:center;gap:12px;
+  background:var(--glass);border:1px solid var(--border);border-radius:18px;
+  padding:22px 16px;width:116px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
   transition:all .35s cubic-bezier(.23,1,.32,1);
   overflow:hidden;cursor:default;
 }
 .tech-card::before{
-  content:'';position:absolute;inset:0;border-radius:20px;
-  background:linear-gradient(135deg,rgba(255,107,107,0.08),rgba(29,233,182,0.04));
+  content:'';position:absolute;inset:0;border-radius:18px;
+  background:linear-gradient(135deg,rgba(255,107,107,.08),rgba(29,233,182,.04));
   opacity:0;transition:opacity .35s;
 }
-.tech-card:hover{
-  transform:translateY(-10px) scale(1.04);
-  border-color:var(--border2);
-  box-shadow:0 20px 50px rgba(0,0,0,.5),var(--gt);
-}
+.tech-card:hover{transform:translateY(-8px) scale(1.04);border-color:var(--border2);box-shadow:0 20px 50px rgba(0,0,0,.5),var(--gt)}
 .tech-card:hover::before{opacity:1}
-
-/* Arc progress ring around icon */
-.tech-ring{position:relative;width:64px;height:64px}
+.tech-ring{position:relative;width:58px;height:58px}
 .tech-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
 .ring-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:3}
 .ring-prog{fill:none;stroke-width:3;stroke-linecap:round;stroke:url(#skillGrad2);transition:stroke-dashoffset 1.4s cubic-bezier(.23,1,.32,1)}
-.tech-icon-inner{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:1.6rem;transition:transform .3s;
-}
+.tech-icon-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.45rem;transition:transform .3s}
 .tech-card:hover .tech-icon-inner{transform:scale(1.15)}
-.tech-name{font-size:0.78rem;font-weight:600;color:var(--text);letter-spacing:.03em;text-align:center}
-.tech-pct{
-  font-family:var(--fm);font-size:0.7rem;color:var(--cyan);
-  background:rgba(29,233,182,.1);border:1px solid rgba(29,233,182,.2);
-  border-radius:20px;padding:2px 10px;letter-spacing:.05em;
-}
+.tech-name{font-size:0.72rem;font-weight:600;color:var(--text);letter-spacing:.03em;text-align:center;line-height:1.3}
+.tech-pct{font-family:var(--fm);font-size:0.66rem;color:var(--cyan);background:rgba(29,233,182,.1);border:1px solid rgba(29,233,182,.2);border-radius:20px;padding:2px 9px;letter-spacing:.04em}
 
-/* Soft skills — animated radial bars */
-.soft-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
-  max-width:900px;margin:0 auto;
+/* Category wrapper */
+.skill-cat-wrap{max-width:1000px;margin:0 auto;padding:28px;background:var(--glass);border:1px solid var(--border);border-radius:22px;backdrop-filter:blur(12px)}
+
+/* Bar skills (for secondary categories) */
+.bar-grid{display:flex;flex-direction:column;gap:10px;max-width:1000px;margin:0 auto}
+.bar-row{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 16px;background:var(--glass);border:1px solid var(--border);
+  border-radius:12px;transition:all .3s;
 }
-.soft-card{
-  background:var(--glass);border:1px solid var(--border);border-radius:20px;
-  padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:14px;
-  transition:all .3s;text-align:center;position:relative;overflow:hidden;
-}
-.soft-card::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 100%,rgba(29,233,182,0.06),transparent 70%);
-  opacity:0;transition:opacity .3s;
-}
-.soft-card:hover{background:var(--glass2);border-color:var(--border2);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.3),var(--gt)}
-.soft-card:hover::after{opacity:1}
-.sof-icon-wrap{
-  width:46px;height:46px;border-radius:14px;
-  background:rgba(29,233,182,.08);border:1px solid rgba(29,233,182,.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;color:var(--cyan);
+.bar-row:hover{background:var(--glass2);border-color:var(--border2);transform:translateX(4px)}
+.bar-icon{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.15);color:var(--coral);
   transition:all .3s;
 }
+.bar-row:hover .bar-icon{background:rgba(29,233,182,.1);border-color:rgba(29,233,182,.25);color:var(--cyan)}
+.bar-label{font-size:.82rem;font-weight:500;color:var(--text);min-width:130px}
+.bar-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--coral),var(--cyan));width:0;transition:width 1.2s cubic-bezier(.23,1,.32,1)}
+.bar-pct{font-family:var(--fm);font-size:.72rem;color:var(--muted);min-width:32px;text-align:right}
+
+/* Two-col bar grid */
+.bar-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:1000px;margin:0 auto}
+
+/* Soft skills */
+.soft-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1000px;margin:0 auto}
+.soft-card{background:var(--glass);border:1px solid var(--border);border-radius:18px;padding:24px 14px;display:flex;flex-direction:column;align-items:center;gap:12px;transition:all .3s;text-align:center;position:relative;overflow:hidden}
+.soft-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,rgba(29,233,182,.06),transparent 70%);opacity:0;transition:opacity .3s}
+.soft-card:hover{background:var(--glass2);border-color:var(--border2);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.3),var(--gt)}
+.soft-card:hover::after{opacity:1}
+.sof-icon-wrap{width:44px;height:44px;border-radius:13px;background:rgba(29,233,182,.08);border:1px solid rgba(29,233,182,.2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;color:var(--cyan);transition:all .3s}
 .soft-card:hover .sof-icon-wrap{background:rgba(29,233,182,.15);box-shadow:var(--gt)}
-.sof-name{font-size:0.82rem;font-weight:600;color:var(--text);letter-spacing:.04em}
-.sring-wrap{position:relative;width:90px;height:90px}
-.sring-wrap svg{width:90px;height:90px;transform:rotate(-90deg)}
+.sof-name{font-size:.8rem;font-weight:600;color:var(--text);letter-spacing:.04em}
+.sring-wrap{position:relative;width:86px;height:86px}
+.sring-wrap svg{width:86px;height:86px;transform:rotate(-90deg)}
 .rbg{fill:none;stroke:rgba(255,255,255,.06);stroke-width:7}
 .rfill{fill:none;stroke-width:7;stroke-linecap:round;stroke:url(#sg);transition:stroke-dashoffset 1.4s cubic-bezier(.23,1,.32,1)}
-.rpct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:1rem;font-weight:500;color:#fff}
+.rpct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.95rem;font-weight:500;color:#fff}
 
 /* ══════════════════════════════════════════
    PORTFOLIO
@@ -664,7 +757,8 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
   .soft-grid{grid-template-columns:repeat(2,1fr)}
   .proj-grid{grid-template-columns:repeat(2,1fr)}
   .con-wrap{gap:36px}
-  .tech-card{width:115px}
+  .tech-card{width:106px}
+  .bar-grid-2{grid-template-columns:1fr}
 }
 @media(max-width:900px){
   header{padding:16px 22px}
@@ -680,17 +774,27 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
   .pic-exp{left:-10px}
   .about-grid{grid-template-columns:1fr}
   .aimg-wrap{max-width:280px;margin:0 auto}
-  .tech-grid{gap:12px}
-  .tech-card{width:100px;padding:20px 12px}
+  .tech-grid{gap:10px}
+  .tech-card{width:98px;padding:18px 12px}
+  .bar-grid-2{grid-template-columns:1fr}
   .soft-grid{grid-template-columns:repeat(2,1fr)}
   .proj-grid{grid-template-columns:1fr}
   .con-wrap{grid-template-columns:1fr}
   section{padding:110px 22px 70px}
+  .skill-tabs{gap:6px}
+  .skill-tab{padding:8px 14px;font-size:.72rem}
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
+  .skill-cat-wrap{padding:20px 16px}
 }
 @media(max-width:480px){
-  .tech-card{width:88px;padding:16px 10px}
-  .tech-ring{width:52px;height:52px}
-  .tech-icon-inner{font-size:1.3rem}
+  .tech-card{width:82px;padding:14px 8px}
+  .tech-ring{width:48px;height:48px}
+  .tech-icon-inner{font-size:1.2rem}
+  .soft-grid{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:14px 18px}
+  .skill-tab{padding:7px 11px;font-size:.68rem}
+  .bar-label{min-width:100px;font-size:.76rem}
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -713,11 +817,13 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mnav">
-  <a href="#home"    class="mob-link">Home</a>
-  <a href="#about"   class="mob-link">About</a>
-  <a href="#skills"  class="mob-link">Skills</a>
-  <a href="#works"   class="mob-link">Works</a>
-  <a href="#contact" class="mob-link">Contact</a>
+  <a href="#home" class="mob-nav-logo"><span class="lt">T</span><span class="lr">ajbid.</span></a>
+  <a href="#home"    class="mob-link" onclick="closeMob()"><i class="fas fa-house"></i> Home</a>
+  <a href="#about"   class="mob-link" onclick="closeMob()"><i class="fas fa-user"></i> About</a>
+  <a href="#skills"  class="mob-link" onclick="closeMob()"><i class="fas fa-code"></i> Skills</a>
+  <a href="#works"   class="mob-link" onclick="closeMob()"><i class="fas fa-flask"></i> Works</a>
+  <a href="#contact" class="mob-link" onclick="closeMob()"><i class="fas fa-envelope"></i> Contact</a>
+  <div class="mob-nav-footer">Mashfiquzzaman Tajbid · ML & DL Researcher</div>
 </div>
 
 <!-- TICKER -->
@@ -952,6 +1058,13 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
           </div>
           <div class="cert-label">Certificate III</div>
         </div>
+        <div class="cert-card">
+          <div class="cert-img-wrap">
+            <img src="tajbid.jpg" alt="Certificate 4" onclick="openCertModal(this.src)">
+            <div class="cert-zoom"><i class="fas fa-expand-alt"></i></div>
+          </div>
+          <div class="cert-label">Certificate IV</div>
+        </div>
       </div>
     </div>
   </div>
@@ -987,123 +1100,156 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
     <div class="sh-line"></div>
   </div>
 
-  <!-- Tab switcher -->
+  <!-- 4-Category Tab switcher -->
   <div class="skill-tabs reveal">
-    <button class="skill-tab active" onclick="switchTab('tech',this)">⚡ Technical</button>
-    <button class="skill-tab" onclick="switchTab('soft',this)">🧠 Soft Skills</button>
+    <button class="skill-tab active" onclick="switchTab('lang',this)"><i class="fas fa-code"></i> Languages</button>
+    <button class="skill-tab" onclick="switchTab('web',this)"><i class="fas fa-globe"></i> Web &amp; App</button>
+    <button class="skill-tab" onclick="switchTab('ai',this)"><i class="fas fa-robot"></i> AI / ML / DL</button>
+    <button class="skill-tab" onclick="switchTab('soft',this)"><i class="fas fa-star"></i> Soft Skills</button>
   </div>
 
-  <!-- Technical Skills Panel -->
-  <div class="skill-panel active" id="panel-tech">
-    <div class="tech-grid reveal">
-      <div class="tech-card" data-pct="85">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner" style="color:#a8b4ff">C</div>
+  <!-- ── PANEL 1: Programming Languages ── -->
+  <div class="skill-panel active" id="panel-lang">
+    <div class="skill-cat-wrap reveal">
+      <div class="cat-header">
+        <div class="cat-icon coral"><i class="fas fa-terminal"></i></div>
+        <div>
+          <div class="cat-title">Programming Languages</div>
+          <div class="cat-sub">Core languages I write production code in</div>
         </div>
-        <span class="tech-name">C Language</span>
-        <span class="tech-pct">85%</span>
       </div>
-      <div class="tech-card" data-pct="80">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner" style="color:#6ebfff">C++</div>
+      <div class="tech-grid">
+        <div class="tech-card" data-pct="85">
+          <div class="tech-ring"><svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg><div class="tech-icon-inner" style="color:#a8b4ff;font-weight:700">C</div></div>
+          <span class="tech-name">C</span><span class="tech-pct">85%</span>
         </div>
-        <span class="tech-name">C++</span>
-        <span class="tech-pct">80%</span>
-      </div>
-      <div class="tech-card" data-pct="87">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner"><i class="fab fa-java" style="color:#f89820"></i></div>
+        <div class="tech-card" data-pct="80">
+          <div class="tech-ring"><svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg><div class="tech-icon-inner" style="color:#6ebfff;font-weight:700;font-size:1rem">C++</div></div>
+          <span class="tech-name">C++</span><span class="tech-pct">80%</span>
         </div>
-        <span class="tech-name">Java</span>
-        <span class="tech-pct">87%</span>
-      </div>
-      <div class="tech-card" data-pct="85">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner"><i class="fab fa-html5" style="color:#e34c26"></i></div>
+        <div class="tech-card" data-pct="87">
+          <div class="tech-ring"><svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg><div class="tech-icon-inner"><i class="fab fa-java" style="color:#f89820"></i></div></div>
+          <span class="tech-name">Java</span><span class="tech-pct">87%</span>
         </div>
-        <span class="tech-name">HTML5</span>
-        <span class="tech-pct">85%</span>
-      </div>
-      <div class="tech-card" data-pct="88">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner"><i class="fab fa-css3-alt" style="color:#264de4"></i></div>
+        <div class="tech-card" data-pct="90">
+          <div class="tech-ring"><svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg><div class="tech-icon-inner"><i class="fab fa-python" style="color:#3776ab"></i></div></div>
+          <span class="tech-name">Python</span><span class="tech-pct">90%</span>
         </div>
-        <span class="tech-name">CSS3</span>
-        <span class="tech-pct">88%</span>
-      </div>
-      <div class="tech-card" data-pct="88">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner"><i class="fab fa-js" style="color:#f7df1e"></i></div>
+        <div class="tech-card" data-pct="88">
+          <div class="tech-ring"><svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg><div class="tech-icon-inner"><i class="fab fa-js" style="color:#f7df1e"></i></div></div>
+          <span class="tech-name">JavaScript</span><span class="tech-pct">88%</span>
         </div>
-        <span class="tech-name">JavaScript</span>
-        <span class="tech-pct">88%</span>
-      </div>
-      <div class="tech-card" data-pct="90">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner"><i class="fab fa-python" style="color:#3776ab"></i></div>
+        <div class="tech-card" data-pct="88">
+          <div class="tech-ring"><svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg><div class="tech-icon-inner" style="color:#3178c6;font-weight:700;font-size:.9rem">TS</div></div>
+          <span class="tech-name">TypeScript</span><span class="tech-pct">88%</span>
         </div>
-        <span class="tech-name">Python</span>
-        <span class="tech-pct">90%</span>
-      </div>
-      <div class="tech-card" data-pct="75">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner"><i class="fab fa-react" style="color:#61dafb"></i></div>
-        </div>
-        <span class="tech-name">React</span>
-        <span class="tech-pct">75%</span>
-      </div>
-      <div class="tech-card" data-pct="70">
-        <div class="tech-ring">
-          <svg viewBox="0 0 60 60"><circle class="ring-track" cx="30" cy="30" r="26"/><circle class="ring-prog" cx="30" cy="30" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/></svg>
-          <div class="tech-icon-inner" style="font-size:1.3rem">🐦</div>
-        </div>
-        <span class="tech-name">Flutter</span>
-        <span class="tech-pct">70%</span>
       </div>
     </div>
   </div>
 
-  <!-- Soft Skills Panel -->
+  <!-- ── PANEL 2: Web & App Dev ── -->
+  <div class="skill-panel" id="panel-web">
+    <div class="skill-cat-wrap reveal">
+      <div class="cat-header">
+        <div class="cat-icon cyan"><i class="fas fa-layer-group"></i></div>
+        <div>
+          <div class="cat-title">Frontend &amp; UI</div>
+          <div class="cat-sub">Frameworks, design systems &amp; styling</div>
+        </div>
+      </div>
+      <div class="bar-grid-2">
+        <div class="bar-row" data-bar="85"><div class="bar-icon"><i class="fab fa-html5" style="color:#e34c26"></i></div><span class="bar-label">HTML5</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">85%</span></div>
+        <div class="bar-row" data-bar="88"><div class="bar-icon"><i class="fab fa-css3-alt" style="color:#264de4"></i></div><span class="bar-label">CSS3</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">88%</span></div>
+        <div class="bar-row" data-bar="75"><div class="bar-icon"><i class="fab fa-react" style="color:#61dafb"></i></div><span class="bar-label">React.js</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">75%</span></div>
+        <div class="bar-row" data-bar="85"><div class="bar-icon" style="color:#000;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15)"><b style="color:#fff;font-size:.7rem">N</b></div><span class="bar-label">Next.js</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">85%</span></div>
+        <div class="bar-row" data-bar="82"><div class="bar-icon"><span style="color:#38bdf8;font-weight:700;font-size:.7rem">TW</span></div><span class="bar-label">Tailwind CSS</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">82%</span></div>
+        <div class="bar-row" data-bar="70"><div class="bar-icon">🐦</div><span class="bar-label">Flutter</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">70%</span></div>
+      </div>
+    </div>
+    <div class="skill-cat-wrap reveal" style="margin-top:18px">
+      <div class="cat-header">
+        <div class="cat-icon gold"><i class="fas fa-server"></i></div>
+        <div>
+          <div class="cat-title">Backend, Database &amp; DevOps</div>
+          <div class="cat-sub">Server-side, APIs, data &amp; infrastructure</div>
+        </div>
+      </div>
+      <div class="bar-grid-2">
+        <div class="bar-row" data-bar="83"><div class="bar-icon"><i class="fab fa-node-js" style="color:#8cc84b"></i></div><span class="bar-label">Node.js</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">83%</span></div>
+        <div class="bar-row" data-bar="80"><div class="bar-icon"><span style="color:#fff;font-size:.65rem;font-weight:700">EX</span></div><span class="bar-label">Express.js</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">80%</span></div>
+        <div class="bar-row" data-bar="78"><div class="bar-icon"><span style="color:#336791;font-size:.65rem;font-weight:700">PG</span></div><span class="bar-label">PostgreSQL</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">78%</span></div>
+        <div class="bar-row" data-bar="75"><div class="bar-icon"><span style="color:#3ecf8e;font-size:.65rem;font-weight:700">SB</span></div><span class="bar-label">Supabase</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">75%</span></div>
+        <div class="bar-row" data-bar="80"><div class="bar-icon"><i class="fab fa-git-alt" style="color:#f05032"></i></div><span class="bar-label">Git &amp; GitHub</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">80%</span></div>
+        <div class="bar-row" data-bar="75"><div class="bar-icon"><i class="fas fa-terminal" style="color:#4af626"></i></div><span class="bar-label">Linux CLI</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">75%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 3: AI / ML / DL ── -->
+  <div class="skill-panel" id="panel-ai">
+    <div class="skill-cat-wrap reveal">
+      <div class="cat-header">
+        <div class="cat-icon coral"><i class="fas fa-brain"></i></div>
+        <div>
+          <div class="cat-title">ML / DL Frameworks &amp; Libraries</div>
+          <div class="cat-sub">Deep learning, model training &amp; computer vision</div>
+        </div>
+      </div>
+      <div class="bar-grid-2">
+        <div class="bar-row" data-bar="85"><div class="bar-icon"><span style="color:#ee4c2c;font-weight:700;font-size:.65rem">PT</span></div><span class="bar-label">PyTorch</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">85%</span></div>
+        <div class="bar-row" data-bar="90"><div class="bar-icon"><i class="fab fa-python" style="color:#3776ab"></i></div><span class="bar-label">Python (ML)</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">90%</span></div>
+        <div class="bar-row" data-bar="88"><div class="bar-icon"><span style="color:#fff;font-size:.6rem;font-weight:700">CNN</span></div><span class="bar-label">Computer Vision</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">88%</span></div>
+        <div class="bar-row" data-bar="85"><div class="bar-icon"><span style="color:#1de9b6;font-size:.6rem;font-weight:700">XAI</span></div><span class="bar-label">Explainable AI</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">85%</span></div>
+      </div>
+    </div>
+    <div class="skill-cat-wrap reveal" style="margin-top:18px">
+      <div class="cat-header">
+        <div class="cat-icon cyan"><i class="fas fa-robot"></i></div>
+        <div>
+          <div class="cat-title">Generative AI &amp; LLM Engineering</div>
+          <div class="cat-sub">AI agents, RAG pipelines &amp; LLM integration</div>
+        </div>
+      </div>
+      <div class="bar-grid-2">
+        <div class="bar-row" data-bar="80"><div class="bar-icon"><span style="color:#10a37f;font-size:.6rem;font-weight:700">OAI</span></div><span class="bar-label">OpenAI APIs</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">80%</span></div>
+        <div class="bar-row" data-bar="85"><div class="bar-icon"><span style="color:#ff6b6b;font-size:.6rem;font-weight:700">LLM</span></div><span class="bar-label">LLM Integration</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">85%</span></div>
+        <div class="bar-row" data-bar="82"><div class="bar-icon"><span style="color:#fbbf24;font-size:.6rem;font-weight:700">RAG</span></div><span class="bar-label">RAG Pipelines</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">82%</span></div>
+        <div class="bar-row" data-bar="75"><div class="bar-icon"><i class="fas fa-robot" style="color:#a78bfa"></i></div><span class="bar-label">AI Agents</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">75%</span></div>
+        <div class="bar-row" data-bar="75"><div class="bar-icon"><span style="color:#f0abfc;font-size:.58rem;font-weight:700">PE</span></div><span class="bar-label">Prompt Engineering</span><div class="bar-track"><div class="bar-fill"></div></div><span class="bar-pct">75%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 4: Soft Skills ── -->
   <div class="skill-panel" id="panel-soft">
-    <div class="soft-grid reveal">
-      <div class="soft-card">
-        <div class="sof-icon-wrap"><i class="fas fa-lightbulb"></i></div>
-        <span class="sof-name">Creativity</span>
-        <div class="sring-wrap" data-soft="90">
-          <svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg>
-          <div class="rpct">90%</div>
+    <div class="skill-cat-wrap reveal">
+      <div class="cat-header">
+        <div class="cat-icon gold"><i class="fas fa-star"></i></div>
+        <div>
+          <div class="cat-title">Soft Skills &amp; Collaboration</div>
+          <div class="cat-sub">People, mindset &amp; teamwork qualities</div>
         </div>
       </div>
-      <div class="soft-card">
-        <div class="sof-icon-wrap"><i class="fas fa-comments"></i></div>
-        <span class="sof-name">Communication</span>
-        <div class="sring-wrap" data-soft="95">
-          <svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg>
-          <div class="rpct">95%</div>
+      <div class="soft-grid">
+        <div class="soft-card">
+          <div class="sof-icon-wrap"><i class="fas fa-lightbulb"></i></div>
+          <span class="sof-name">Creativity</span>
+          <div class="sring-wrap" data-soft="90"><svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg><div class="rpct">90%</div></div>
         </div>
-      </div>
-      <div class="soft-card">
-        <div class="sof-icon-wrap"><i class="fas fa-brain"></i></div>
-        <span class="sof-name">Problem Solving</span>
-        <div class="sring-wrap" data-soft="80">
-          <svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg>
-          <div class="rpct">80%</div>
+        <div class="soft-card">
+          <div class="sof-icon-wrap"><i class="fas fa-comments"></i></div>
+          <span class="sof-name">Communication</span>
+          <div class="sring-wrap" data-soft="95"><svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg><div class="rpct">95%</div></div>
         </div>
-      </div>
-      <div class="soft-card">
-        <div class="sof-icon-wrap"><i class="fas fa-users"></i></div>
-        <span class="sof-name">Teamwork</span>
-        <div class="sring-wrap" data-soft="90">
-          <svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg>
-          <div class="rpct">90%</div>
+        <div class="soft-card">
+          <div class="sof-icon-wrap"><i class="fas fa-brain"></i></div>
+          <span class="sof-name">Problem Solving</span>
+          <div class="sring-wrap" data-soft="80"><svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg><div class="rpct">80%</div></div>
+        </div>
+        <div class="soft-card">
+          <div class="sof-icon-wrap"><i class="fas fa-users"></i></div>
+          <span class="sof-name">Teamwork</span>
+          <div class="sring-wrap" data-soft="90"><svg viewBox="0 0 100 100"><circle class="rbg" cx="50" cy="50" r="40"/><circle class="rfill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/></svg><div class="rpct">90%</div></div>
         </div>
       </div>
     </div>
@@ -1122,10 +1268,10 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
     <!-- Card 1: Research Project -->
     <div class="pcard reveal">
       <div class="pcard-top-line"></div>
-      <span class="pnum">Research — 01 to 06</span>
+      <span class="pnum">Research — 01 to 07</span>
       <div class="picon"><i class="fas fa-microscope"></i></div>
       <h3 class="ptitle">Research Publications</h3>
-      <p class="pdesc">Active ML &amp; DL researcher focused on medical imaging, explainable AI, computer vision, and intelligent systems.</p>
+      <p class="pdesc">Active ML &amp; DL researcher focused on medical imaging, explainable AI, computer vision, IoT and intelligent systems.</p>
       <div class="ptags">
         <span class="tag">Deep Learning</span>
         <span class="tag">Computer Vision</span>
@@ -1134,7 +1280,8 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
         <span class="tag">Medical Imaging</span>
         <span class="tag">GNN</span>
         <span class="tag">LLM</span>
-        <span class="tag">Ensemble Learning</span>
+        <span class="tag">IoT</span>
+        <span class="tag">Edge-AI</span>
       </div>
       <a href="#" class="pcta" onclick="toggleExpand(event,'expand-research')">
         View Research Papers <i class="fas fa-chevron-down"></i>
@@ -1147,6 +1294,7 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
           <li><strong>Chronic Kidney Disease:</strong> Machine Learning Approaches for Early Prediction of Chronic Kidney Disease and Its Progression</li>
           <li><strong>Plant Disease:</strong> Deep Learning-Based Ensemble Framework for Automated Plant Disease Classification: Integrating InceptionResNetV2 with Meta-Learning and Explainable AI</li>
           <li><strong>Vulnerability Detection:</strong> Explainable Hybrid Graph Neural Networks and Large Language Models for Vulnerability Detection: A Multi-Modal Code Understanding Approach</li>
+          <li><strong>AquaGuard:</strong> An Edge-AI and IoT Based Real-Time Water Quality Monitoring and Pathogen Detection System</li>
         </ul>
         <div class="proj-actions">
           <a href="https://github.com/Tajbid-byte" target="_blank" class="pact-btn github">
@@ -1156,31 +1304,122 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
       </div>
     </div>
 
-    <!-- Card 2: Research Project Deployment -->
+    <!-- Card 2: Research Deployments -->
     <div class="pcard reveal" style="transition-delay:.12s">
       <div class="pcard-top-line"></div>
-      <span class="pnum">Project — 02</span>
+      <span class="pnum">Live — 07 Deployments</span>
       <div class="picon"><i class="fas fa-rocket"></i></div>
       <h3 class="ptitle">Research Deployments</h3>
-      <p class="pdesc">Live deployments of research projects — web apps and UI showcases built from real academic work and data-driven systems.</p>
-      <div class="ptags"><span class="tag">Deployed Apps</span><span class="tag">Web UI</span><span class="tag">Live Projects</span></div>
+      <p class="pdesc">All research papers are live — deployed as fully functional web applications. Click any project to explore the live demo.</p>
+      <div class="ptags">
+        <span class="tag">Live Apps</span>
+        <span class="tag">Vercel</span>
+        <span class="tag">AI-Powered</span>
+        <span class="tag">Web Demos</span>
+      </div>
       <a href="#" class="pcta" onclick="toggleExpand(event,'expand-deploy')">
         View Deployments <i class="fas fa-chevron-down"></i>
       </a>
       <div class="proj-expand" id="expand-deploy">
-        <ul class="proj-list">
-          <li>Budget Tracking System — Government sector allocation dashboard</li>
-          <li>Mini C-Compiler Framework — live demo interface</li>
-          <li>E-Learning Database UI — student &amp; admin portal</li>
-        </ul>
-        <div class="proj-actions">
-          <a href="#" class="pact-btn demo" onclick="return false">
-            <i class="fas fa-images"></i> UI Preview — Coming Soon
-          </a>
-          <a href="https://github.com/Tajbid-byte" target="_blank" class="pact-btn github">
-            <i class="fab fa-github"></i> Source Code
+
+        <div class="deploy-item">
+          <div class="deploy-left">
+            <div class="deploy-dot"></div>
+            <div class="deploy-icon"><i class="fas fa-eye"></i></div>
+            <div class="deploy-info">
+              <div class="deploy-title">Diabetic Retinopathy Screening</div>
+              <div class="deploy-sub">CNN–CatBoost Stacking · Explainable AI</div>
+            </div>
+          </div>
+          <a href="https://retinaai-phi.vercel.app/" target="_blank" class="deploy-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
           </a>
         </div>
+
+        <div class="deploy-item">
+          <div class="deploy-left">
+            <div class="deploy-dot"></div>
+            <div class="deploy-icon"><i class="fas fa-brain"></i></div>
+            <div class="deploy-info">
+              <div class="deploy-title">Brain Tumor Classification</div>
+              <div class="deploy-sub">CAE-BrainNet · MRI · Attention Ensemble</div>
+            </div>
+          </div>
+          <a href="https://caebrainnet.vercel.app/" target="_blank" class="deploy-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
+
+        <div class="deploy-item">
+          <div class="deploy-left">
+            <div class="deploy-dot"></div>
+            <div class="deploy-icon"><i class="fas fa-lungs"></i></div>
+            <div class="deploy-info">
+              <div class="deploy-title">Pneumonia Detection</div>
+              <div class="deploy-sub">PneuXNet · Multi-Scale CNN · XAI</div>
+            </div>
+          </div>
+          <a href="https://pneuxnet.vercel.app/" target="_blank" class="deploy-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
+
+        <div class="deploy-item">
+          <div class="deploy-left">
+            <div class="deploy-dot"></div>
+            <div class="deploy-icon"><i class="fas fa-kidneys"></i></div>
+            <div class="deploy-info">
+              <div class="deploy-title">Chronic Kidney Disease Prediction</div>
+              <div class="deploy-sub">ML Early Prediction · Disease Progression</div>
+            </div>
+          </div>
+          <a href="https://ckd-net-gray.vercel.app/" target="_blank" class="deploy-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
+
+        <div class="deploy-item">
+          <div class="deploy-left">
+            <div class="deploy-dot"></div>
+            <div class="deploy-icon"><i class="fas fa-leaf"></i></div>
+            <div class="deploy-info">
+              <div class="deploy-title">Plant Disease Classification</div>
+              <div class="deploy-sub">InceptionResNetV2 · Meta-Learning · XAI</div>
+            </div>
+          </div>
+          <a href="https://plant-ai-classification.vercel.app/" target="_blank" class="deploy-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
+
+        <div class="deploy-item">
+          <div class="deploy-left">
+            <div class="deploy-dot"></div>
+            <div class="deploy-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="deploy-info">
+              <div class="deploy-title">Vulnerability Detection</div>
+              <div class="deploy-sub">GNN · LLM · Multi-Modal Code Analysis</div>
+            </div>
+          </div>
+          <a href="https://exhygll-ai.vercel.app/" target="_blank" class="deploy-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
+
+        <div class="deploy-item">
+          <div class="deploy-left">
+            <div class="deploy-dot"></div>
+            <div class="deploy-icon"><i class="fas fa-water"></i></div>
+            <div class="deploy-info">
+              <div class="deploy-title">AquaGuard — Water Quality Monitor</div>
+              <div class="deploy-sub">Edge-AI · IoT · Real-Time Pathogen Detection</div>
+            </div>
+          </div>
+          <a href="https://aquaguard-ai-chi.vercel.app/" target="_blank" class="deploy-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
+
       </div>
     </div>
 
@@ -1400,8 +1639,8 @@ addEventListener('scroll',upHdr,{passive:true});upHdr();
 
 /* ═══ HAMBURGER ═══ */
 const ham=document.getElementById('ham'),mnav=document.getElementById('mnav');
-ham.addEventListener('click',()=>{ham.classList.toggle('open');mnav.classList.toggle('open');});
-document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{ham.classList.remove('open');mnav.classList.remove('open');}));
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mnav.classList.toggle('open');document.body.style.overflow=mnav.classList.contains('open')?'hidden':''});
+function closeMob(){ham.classList.remove('open');mnav.classList.remove('open');document.body.style.overflow=''}
 
 /* ═══ SCROLL REVEAL ═══ */
 const allR=document.querySelectorAll('.reveal,.rl,.rr');
@@ -1419,26 +1658,45 @@ function switchTab(id, btn){
   document.querySelectorAll('.skill-tab').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   btn.classList.add('active');
-  // Animate rings if switching to soft
   if(id==='soft') animSoftRings();
+  if(id==='lang') animTechRings(document.querySelector('#panel-lang .tech-grid'));
+  if(id==='web'||id==='ai') animBars(document.getElementById('panel-'+id));
 }
 
-/* ═══ TECH CARD RINGS (trigger on scroll into view) ═══ */
+/* ═══ TECH RING ANIMATION ═══ */
+function animTechRings(grid){
+  if(!grid)return;
+  grid.querySelectorAll('.tech-card').forEach((card,i)=>{
+    const pct=parseInt(card.dataset.pct);
+    const offset=163.4-(pct/100)*163.4;
+    setTimeout(()=>{const el=card.querySelector('.ring-prog');if(el)el.style.strokeDashoffset=offset;},i*80+200);
+  });
+}
 const techObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(!e.isIntersecting)return;
-    e.target.querySelectorAll('.tech-card').forEach((card,i)=>{
-      const pct=parseInt(card.dataset.pct);
-      const circ=163.4;
-      const offset=circ-(pct/100)*circ;
-      setTimeout(()=>{
-        card.querySelector('.ring-prog').style.strokeDashoffset=offset;
-      },i*80+200);
-    });
+    animTechRings(e.target);
     techObs.unobserve(e.target);
   });
 },{threshold:.05});
 document.querySelectorAll('.tech-grid').forEach(el=>techObs.observe(el));
+
+/* ═══ BAR ANIMATION ═══ */
+function animBars(panel){
+  if(!panel)return;
+  panel.querySelectorAll('.bar-row').forEach((row,i)=>{
+    const pct=parseInt(row.dataset.bar);
+    setTimeout(()=>{const fill=row.querySelector('.bar-fill');if(fill)fill.style.width=pct+'%';},i*60+200);
+  });
+}
+const barObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    animBars(e.target.closest('.skill-panel')||e.target);
+    barObs.unobserve(e.target);
+  });
+},{threshold:.05});
+document.querySelectorAll('.bar-grid,.bar-grid-2').forEach(el=>barObs.observe(el));
 
 /* ═══ SOFT SKILL RINGS ═══ */
 function animSoftRings(){
