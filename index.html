@@ -859,6 +859,403 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
   .bar-label{min-width:100px;font-size:.76rem}
   .cert-grid{grid-template-columns:repeat(2,1fr)}
 
+
+
+/* ══════════════════════════════════════════
+   UPGRADED WORKS SECTION — merged from user-supplied code
+══════════════════════════════════════════ */
+/* ══ SECTION ══ */
+#works{
+  position:relative;z-index:1;
+  padding:100px 80px 90px;
+  background:linear-gradient(180deg,transparent,rgba(3,13,36,.6),transparent);
+}
+
+/* ══ SECTION HEADING ══ */
+.sh{text-align:center;margin-bottom:66px}
+.sh-label{display:inline-block;font-family:var(--fm);font-size:0.68rem;color:var(--cyan);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:12px;padding:4px 14px;border:1px solid rgba(29,233,182,.3);border-radius:20px}
+.sh-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.sh-title .acc{color:var(--coral)}
+.sh-line{width:80px;height:3px;background:linear-gradient(90deg,var(--coral),var(--cyan));border-radius:3px;margin:16px auto 0}
+
+/* ══ TAB BAR ══ */
+.works-tabs{
+  display:flex;gap:8px;justify-content:center;
+  margin-bottom:52px;flex-wrap:wrap;
+}
+.wtab{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border:1px solid var(--border);
+  background:var(--glass);color:var(--muted);
+  font-family:var(--fb);font-size:0.78rem;font-weight:500;
+  letter-spacing:0.06em;border-radius:50px;cursor:pointer;
+  transition:all .3s;
+}
+.wtab.active{
+  background:linear-gradient(135deg,var(--coral),#ff8c42);
+  border-color:transparent;color:#fff;
+  box-shadow:0 4px 24px rgba(255,107,107,.4);
+}
+.wtab:not(.active):hover{color:#fff;border-color:var(--border2)}
+.wtab i{font-size:.85rem}
+
+.works-panel{display:none}
+.works-panel.active{display:block;animation:fadeUp .4s ease}
+
+/* ══ LIVE TICKER STRIP ══ */
+.ticker-section{
+  overflow:hidden;
+  background:rgba(29,233,182,.04);
+  border:1px solid rgba(29,233,182,.12);
+  border-radius:16px;
+  padding:0;
+  margin-bottom:48px;
+  position:relative;
+}
+.ticker-label{
+  position:absolute;left:0;top:0;bottom:0;z-index:10;
+  display:flex;align-items:center;
+  background:linear-gradient(135deg,var(--coral),#ff8c42);
+  padding:0 22px;
+  font-family:var(--fm);font-size:0.65rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:#fff;
+  border-radius:16px 0 0 16px;
+  white-space:nowrap;gap:8px;
+}
+.ticker-scroll{
+  padding:0 24px 0 160px;
+  display:flex;white-space:nowrap;
+  animation:tickerRoll 35s linear infinite;
+}
+.ticker-scroll:hover{animation-play-state:paused}
+.tick-item{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;
+  font-family:var(--fm);font-size:0.7rem;
+  color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;border-right:1px solid rgba(255,255,255,.05);
+}
+.tick-item .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 8px var(--cyan);
+  animation:pulse 2s ease-in-out infinite;flex-shrink:0;
+}
+.tick-item .label{color:#fff;font-weight:500}
+.tick-item .tag-pill{
+  background:rgba(29,233,182,.12);border:1px solid rgba(29,233,182,.25);
+  color:var(--cyan);border-radius:20px;padding:2px 10px;
+  font-size:.62rem;letter-spacing:.08em;
+}
+@keyframes tickerRoll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.4}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ RESEARCH GRID ══ */
+.research-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:24px;
+  max-width:1100px;margin:0 auto;
+}
+
+/* ══ RESEARCH CARD ══ */
+.rcard{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:22px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .4s cubic-bezier(.23,1,.32,1),border-color .3s,box-shadow .3s;
+  position:relative;
+}
+.rcard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--coral),var(--cyan),transparent);
+  opacity:0;transition:opacity .4s;z-index:2;
+}
+.rcard:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,107,107,.25);
+  box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 40px rgba(255,107,107,.06);
+}
+.rcard:hover::before{opacity:1}
+
+/* Slideshow */
+.rcard-img{
+  position:relative;width:100%;height:200px;
+  overflow:hidden;background:rgba(0,0,0,.4);
+  flex-shrink:0;
+}
+.rcard-img .slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center top;
+  opacity:0;transition:opacity .8s ease;
+}
+.rcard-img .slide.active{opacity:1}
+.rcard-img .slide-dots{
+  position:absolute;bottom:10px;left:0;right:0;
+  display:flex;justify-content:center;gap:5px;z-index:3;
+}
+.rcard-img .sdot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.3);
+  transition:all .3s;cursor:pointer;
+}
+.rcard-img .sdot.active{
+  background:#fff;transform:scale(1.3);
+}
+.rcard-img .img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(2,8,24,.9));
+  z-index:1;
+}
+.rcard-img .rcard-badge{
+  position:absolute;top:12px;left:12px;z-index:3;
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(2,8,24,.8);backdrop-filter:blur(12px);
+  border:1px solid rgba(29,233,182,.3);border-radius:20px;
+  padding:4px 12px;font-family:var(--fm);font-size:0.6rem;
+  color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;
+}
+.rcard-img .live-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 6px var(--cyan);
+  animation:pulse 2s infinite;
+}
+.rcard-img .img-counter{
+  position:absolute;top:12px;right:12px;z-index:3;
+  background:rgba(2,8,24,.7);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);border-radius:10px;
+  padding:3px 9px;font-family:var(--fm);font-size:.58rem;color:var(--muted);
+}
+/* No-image placeholder */
+.rcard-img.no-img{
+  background:linear-gradient(135deg,rgba(255,107,107,.08),rgba(29,233,182,.05));
+  display:flex;align-items:center;justify-content:center;
+}
+.rcard-img.no-img .placeholder-icon{
+  font-size:3rem;color:rgba(255,255,255,.1);
+}
+
+/* Card body */
+.rcard-body{
+  padding:20px 22px 22px;
+  display:flex;flex-direction:column;gap:12px;
+  flex:1;
+}
+.rcard-num{
+  font-family:var(--fm);font-size:.62rem;
+  color:var(--cyan);letter-spacing:.18em;
+}
+.rcard-title{
+  font-family:var(--fd);font-size:1rem;font-weight:700;
+  color:#fff;letter-spacing:-.2px;line-height:1.3;
+}
+.rcard-sub{
+  font-size:.8rem;color:var(--muted);line-height:1.6;
+}
+.rcard-tags{display:flex;flex-wrap:wrap;gap:6px}
+.rtag{
+  font-family:var(--fm);font-size:.6rem;color:var(--cyan);
+  border:1px solid rgba(29,233,182,.2);border-radius:20px;
+  padding:3px 10px;background:rgba(29,233,182,.04);
+}
+.rcard-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--border);margin-top:auto;
+}
+.rcard-footer .tech-stack{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--fm);font-size:.65rem;color:var(--dim);
+}
+.rcard-footer .tech-stack span{color:var(--muted)}
+.live-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 18px;border-radius:50px;
+  background:linear-gradient(135deg,rgba(255,107,107,.15),rgba(29,233,182,.08));
+  border:1px solid rgba(29,233,182,.3);
+  color:var(--cyan);font-size:.72rem;font-weight:600;
+  text-decoration:none;letter-spacing:.04em;text-transform:uppercase;
+  transition:all .3s;white-space:nowrap;
+}
+.live-btn:hover{
+  background:linear-gradient(135deg,var(--coral),#ff8c42);
+  border-color:transparent;color:#fff;
+  box-shadow:0 6px 20px rgba(255,107,107,.4);
+  transform:translateY(-2px);
+}
+.live-btn i{font-size:.65rem}
+
+/* ══ SHOWCASE PANEL ══ */
+.showcase-ticker{
+  overflow:hidden;
+  border-radius:16px;
+  border:1px solid rgba(165,107,250,.2);
+  background:rgba(167,139,250,.03);
+  margin-bottom:44px;
+  position:relative;
+}
+.showcase-ticker .ticker-label{
+  background:linear-gradient(135deg,#7c3aed,#a78bfa);
+}
+.showcase-ticker .ticker-scroll{animation-duration:40s}
+.showcase-ticker .tick-item .dot{background:var(--purple);box-shadow:0 0 8px var(--purple)}
+.showcase-ticker .tick-item .tag-pill{
+  background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.25);color:var(--purple);
+}
+
+.showcase-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:22px;
+  max-width:1100px;margin:0 auto;
+}
+
+.scard{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .4s cubic-bezier(.23,1,.32,1),border-color .3s,box-shadow .3s;
+  position:relative;
+}
+.scard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--purple),var(--cyan),transparent);
+  opacity:0;transition:opacity .4s;z-index:2;
+}
+.scard:hover{
+  transform:translateY(-7px);
+  border-color:rgba(167,139,250,.25);
+  box-shadow:0 28px 56px rgba(0,0,0,.45),0 0 40px rgba(167,139,250,.06);
+}
+.scard:hover::before{opacity:1}
+
+.scard-img{position:relative;width:100%;height:180px;overflow:hidden;background:rgba(0,0,0,.4);flex-shrink:0}
+.scard-img .slide{position:absolute;inset:0;background-size:cover;background-position:center top;opacity:0;transition:opacity .8s ease}
+.scard-img .slide.active{opacity:1}
+.scard-img .slide-dots{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:5px;z-index:3}
+.scard-img .sdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.3);transition:all .3s;cursor:pointer}
+.scard-img .sdot.active{background:#fff;transform:scale(1.3)}
+.scard-img .img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(2,8,24,.9));z-index:1}
+.scard-img .scard-badge{
+  position:absolute;top:10px;left:10px;z-index:3;
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(2,8,24,.8);backdrop-filter:blur(12px);
+  border:1px solid rgba(167,139,250,.35);border-radius:20px;
+  padding:3px 11px;font-family:var(--fm);font-size:.58rem;
+  color:var(--purple);letter-spacing:.1em;text-transform:uppercase;
+}
+.scard-img.no-img{
+  background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(29,233,182,.04));
+  display:flex;align-items:center;justify-content:center;
+}
+.scard-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.scard-title{font-family:var(--fd);font-size:.95rem;font-weight:700;color:#fff;line-height:1.3;letter-spacing:-.2px}
+.scard-sub{font-size:.78rem;color:var(--muted);line-height:1.6}
+.scard-tags{display:flex;flex-wrap:wrap;gap:5px}
+.stag{
+  font-family:var(--fm);font-size:.58rem;color:var(--purple);
+  border:1px solid rgba(167,139,250,.2);border-radius:20px;
+  padding:2px 9px;background:rgba(167,139,250,.04);
+}
+.scard-footer{
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-top:10px;border-top:1px solid var(--border);margin-top:auto;gap:8px;
+}
+.live-btn-purple{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 16px;border-radius:50px;
+  background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(29,233,182,.06));
+  border:1px solid rgba(167,139,250,.3);
+  color:var(--purple);font-size:.7rem;font-weight:600;
+  text-decoration:none;letter-spacing:.04em;text-transform:uppercase;
+  transition:all .3s;white-space:nowrap;
+}
+.live-btn-purple:hover{
+  background:linear-gradient(135deg,#7c3aed,#a78bfa);
+  border-color:transparent;color:#fff;
+  box-shadow:0 6px 20px rgba(124,58,237,.4);
+  transform:translateY(-2px);
+}
+.live-btn-purple i{font-size:.62rem}
+.gh-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:50px;
+  border:1px solid var(--border);color:var(--muted);
+  font-size:.68rem;font-weight:500;text-decoration:none;
+  transition:all .3s;letter-spacing:.03em;
+}
+.gh-btn:hover{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06)}
+.gh-btn i{font-size:.65rem}
+
+/* Research paper card */
+.paper-list{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.paper-row{
+  display:flex;align-items:flex-start;gap:18px;
+  padding:20px 24px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);border-radius:16px;
+  transition:all .3s;
+}
+.paper-row:hover{
+  background:rgba(29,233,182,.04);
+  border-color:rgba(29,233,182,.2);
+  transform:translateX(5px);
+}
+.paper-num{
+  flex-shrink:0;width:36px;height:36px;border-radius:10px;
+  background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fm);font-size:.7rem;color:var(--coral);font-weight:500;
+}
+.paper-info{flex:1;min-width:0}
+.paper-title{font-size:.9rem;font-weight:600;color:#fff;line-height:1.45;margin-bottom:6px}
+.paper-title strong{color:var(--cyan)}
+.paper-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.paper-tag{
+  font-family:var(--fm);font-size:.58rem;color:var(--coral);
+  border:1px solid rgba(255,107,107,.2);border-radius:20px;
+  padding:2px 9px;background:rgba(255,107,107,.04);
+}
+
+/* ══ STATS BAR ══ */
+.stats-bar{
+  display:flex;gap:0;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;margin-bottom:48px;
+  max-width:1100px;margin-left:auto;margin-right:auto;
+  margin-bottom:48px;
+}
+.stats-item{
+  flex:1;padding:20px 24px;text-align:center;
+  border-right:1px solid var(--border);
+  transition:background .3s;
+}
+.stats-item:last-child{border-right:none}
+.stats-item:hover{background:rgba(29,233,182,.04)}
+.stats-n{
+  font-family:var(--fd);font-size:2rem;font-weight:900;
+  background:linear-gradient(135deg,#fff,var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;margin-bottom:6px;
+}
+.stats-l{font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:.12em}
+
+@media(max-width:900px){
+  #works{padding:90px 22px 70px}
+  .research-grid,.showcase-grid{grid-template-columns:1fr}
+  .stats-bar{flex-wrap:wrap}
+  .stats-item{min-width:50%}
+  .ticker-label{padding:0 12px;font-size:.58rem}
+  .ticker-scroll{padding-left:120px}
+  .paper-row{flex-direction:column;gap:10px}
+}
+
+/* Integration override: make the upgraded Works section behave correctly inside the full portfolio layout */
+#works{display:block;min-height:auto;justify-content:initial;}
+#works .stats-bar{margin-left:auto;margin-right:auto;}
+
 </style>
 </head>
 <body>
@@ -1337,281 +1734,67 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
 
 <!-- ═══════════════ WORKS ═══════════════ -->
 <section id="works">
-  <div class="sh reveal">
+
+  <!-- SECTION HEADING -->
+  <div class="sh">
     <span class="sh-label">My Work</span>
     <h2 class="sh-title">Research &amp; <span class="acc">Works</span></h2>
     <div class="sh-line"></div>
   </div>
-  <div class="proj-grid">
 
-    <!-- Card 1: Research Project -->
-    <div class="pcard reveal">
-      <div class="pcard-top-line"></div>
-      <span class="pnum">Research — 01 to 07</span>
-      <div class="picon"><i class="fas fa-microscope"></i></div>
-      <h3 class="ptitle">Research Publications</h3>
-      <p class="pdesc">Active ML &amp; DL researcher focused on medical imaging, explainable AI, computer vision, IoT and intelligent systems.</p>
-      <div class="ptags">
-        <span class="tag">Deep Learning</span>
-        <span class="tag">Computer Vision</span>
-        <span class="tag">Explainable AI</span>
-        <span class="tag">CNN</span>
-        <span class="tag">Medical Imaging</span>
-        <span class="tag">GNN</span>
-        <span class="tag">LLM</span>
-        <span class="tag">IoT</span>
-        <span class="tag">Edge-AI</span>
-      </div>
-      <a href="#" class="pcta" onclick="toggleExpand(event,'expand-research')">
-        View Research Papers <i class="fas fa-chevron-down"></i>
-      </a>
-      <div class="proj-expand" id="expand-research">
-        <ul class="proj-list">
-          <li><strong>Diabetic Retinopathy:</strong> Mitigating the Accuracy–Explainability Trade-Off in Diabetic Retinopathy Screening Through CNN–CatBoost Stacking</li>
-          <li><strong>Brain Tumor Classification:</strong> CAE-BrainNet: A Statistically Validated Class-Adaptive Attention Ensemble Model for Explainable Brain Tumor Classification from MRI</li>
-          <li><strong>Pneumonia Detection:</strong> PneuXNet: An Interpretable CNN Framework for High-Accuracy Pneumonia Detection Using Multi-Scale and Adaptive Attention</li>
-          <li><strong>Chronic Kidney Disease:</strong> Machine Learning Approaches for Early Prediction of Chronic Kidney Disease and Its Progression</li>
-          <li><strong>Plant Disease:</strong> Deep Learning-Based Ensemble Framework for Automated Plant Disease Classification: Integrating InceptionResNetV2 with Meta-Learning and Explainable AI</li>
-          <li><strong>Vulnerability Detection:</strong> Explainable Hybrid Graph Neural Networks and Large Language Models for Vulnerability Detection: A Multi-Modal Code Understanding Approach</li>
-          <li><strong>AquaGuard:</strong> An Edge-AI and IoT Based Real-Time Water Quality Monitoring and Pathogen Detection System</li>
-        </ul>
-        <div class="proj-actions">
-          <a href="https://github.com/Tajbid-byte" target="_blank" class="pact-btn github">
-            <i class="fab fa-github"></i> GitHub Profile
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 2: Research Deployments -->
-    <div class="pcard reveal" style="transition-delay:.12s">
-      <div class="pcard-top-line"></div>
-      <span class="pnum">Live — 07 Deployments</span>
-      <div class="picon"><i class="fas fa-rocket"></i></div>
-      <h3 class="ptitle">Research Deployments</h3>
-      <p class="pdesc">All research papers are live — deployed as fully functional web applications. Click any project to explore the live demo.</p>
-      <div class="ptags">
-        <span class="tag">Live Apps</span>
-        <span class="tag">Vercel</span>
-        <span class="tag">AI-Powered</span>
-        <span class="tag">Web Demos</span>
-      </div>
-      <a href="#" class="pcta" onclick="toggleExpand(event,'expand-deploy')">
-        View Deployments <i class="fas fa-chevron-down"></i>
-      </a>
-      <div class="proj-expand" id="expand-deploy">
-
-        <div class="deploy-item">
-          <div class="deploy-left">
-            <div class="deploy-dot"></div>
-            <div class="deploy-icon"><i class="fas fa-eye"></i></div>
-            <div class="deploy-info">
-              <div class="deploy-title">Diabetic Retinopathy Screening</div>
-              <div class="deploy-sub">CNN–CatBoost Stacking · Explainable AI</div>
-            </div>
-          </div>
-          <a href="https://retinaai-phi.vercel.app/" target="_blank" class="deploy-btn">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-        </div>
-
-        <div class="deploy-item">
-          <div class="deploy-left">
-            <div class="deploy-dot"></div>
-            <div class="deploy-icon"><i class="fas fa-brain"></i></div>
-            <div class="deploy-info">
-              <div class="deploy-title">Brain Tumor Classification</div>
-              <div class="deploy-sub">CAE-BrainNet · MRI · Attention Ensemble</div>
-            </div>
-          </div>
-          <a href="https://caebrainnet.vercel.app/" target="_blank" class="deploy-btn">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-        </div>
-
-        <div class="deploy-item">
-          <div class="deploy-left">
-            <div class="deploy-dot"></div>
-            <div class="deploy-icon"><i class="fas fa-lungs"></i></div>
-            <div class="deploy-info">
-              <div class="deploy-title">Pneumonia Detection</div>
-              <div class="deploy-sub">PneuXNet · Multi-Scale CNN · XAI</div>
-            </div>
-          </div>
-          <a href="https://pneuxnet.vercel.app/" target="_blank" class="deploy-btn">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-        </div>
-
-        <div class="deploy-item">
-          <div class="deploy-left">
-            <div class="deploy-dot"></div>
-            <div class="deploy-icon"><i class="fas fa-kidneys"></i></div>
-            <div class="deploy-info">
-              <div class="deploy-title">Chronic Kidney Disease Prediction</div>
-              <div class="deploy-sub">ML Early Prediction · Disease Progression</div>
-            </div>
-          </div>
-          <a href="https://ckd-net-gray.vercel.app/" target="_blank" class="deploy-btn">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-        </div>
-
-        <div class="deploy-item">
-          <div class="deploy-left">
-            <div class="deploy-dot"></div>
-            <div class="deploy-icon"><i class="fas fa-leaf"></i></div>
-            <div class="deploy-info">
-              <div class="deploy-title">Plant Disease Classification</div>
-              <div class="deploy-sub">InceptionResNetV2 · Meta-Learning · XAI</div>
-            </div>
-          </div>
-          <a href="https://plant-ai-classification.vercel.app/" target="_blank" class="deploy-btn">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-        </div>
-
-        <div class="deploy-item">
-          <div class="deploy-left">
-            <div class="deploy-dot"></div>
-            <div class="deploy-icon"><i class="fas fa-shield-alt"></i></div>
-            <div class="deploy-info">
-              <div class="deploy-title">Vulnerability Detection</div>
-              <div class="deploy-sub">GNN · LLM · Multi-Modal Code Analysis</div>
-            </div>
-          </div>
-          <a href="https://exhygll-ai.vercel.app/" target="_blank" class="deploy-btn">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-        </div>
-
-        <div class="deploy-item">
-          <div class="deploy-left">
-            <div class="deploy-dot"></div>
-            <div class="deploy-icon"><i class="fas fa-water"></i></div>
-            <div class="deploy-info">
-              <div class="deploy-title">AquaGuard — Water Quality Monitor</div>
-              <div class="deploy-sub">Edge-AI · IoT · Real-Time Pathogen Detection</div>
-            </div>
-          </div>
-          <a href="https://aquaguard-ai-chi.vercel.app/" target="_blank" class="deploy-btn">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Card 3: Showcase Projects -->
-    <div class="pcard reveal" style="transition-delay:.24s">
-      <div class="pcard-top-line"></div>
-      <span class="pnum">Project — 03</span>
-      <div class="picon"><i class="fas fa-layer-group"></i></div>
-      <h3 class="ptitle">Showcase Projects</h3>
-      <p class="pdesc">A curated collection of real-world apps, tools, and UI/UX designs — from web dashboards to healthcare platforms.</p>
-      <div class="ptags">
-        <span class="tag">Web App</span>
-        <span class="tag">UI/UX</span>
-        <span class="tag">Flutter</span>
-        <span class="tag">Figma</span>
-        <span class="tag">Full-Stack</span>
-      </div>
-      <a href="#" class="pcta" onclick="toggleExpand(event,'expand-showcase')">
-        View All Projects <i class="fas fa-chevron-down"></i>
-      </a>
-      <div class="proj-expand" id="expand-showcase">
-
-        <!-- Project 1 -->
-        <div class="sc-item">
-          <div class="sc-header">
-            <div class="sc-icon"><i class="fas fa-wallet"></i></div>
-            <div class="sc-meta">
-              <div class="sc-title">Budget Tracking App</div>
-              <div class="sc-sub">Personal finance management &amp; expense tracker</div>
-            </div>
-          </div>
-          <div class="sc-actions">
-            <a href="https://github.com/Tajbid-byte/Budget-Tracking-App" target="_blank" class="pact-btn github"><i class="fab fa-github"></i> Source Code</a>
-            <button class="pact-btn demo" onclick="toggleScImg(this,'Budget.jpg','Budget1.jpg')"><i class="fas fa-images"></i> View UI</button>
-          </div>
-          <div class="sc-imgs hidden">
-            <img src="Budget.jpg" alt="Budget App UI 1">
-            <img src="Budget1.jpg" alt="Budget App UI 2">
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="sc-item">
-          <div class="sc-header">
-            <div class="sc-icon"><i class="fas fa-desktop"></i></div>
-            <div class="sc-meta">
-              <div class="sc-title">System Monitor Web App</div>
-              <div class="sc-sub">Real-time system resource monitoring dashboard</div>
-            </div>
-          </div>
-          <div class="sc-actions">
-            <a href="https://github.com/Tajbid-byte/System-Monitor-WebApp" target="_blank" class="pact-btn github"><i class="fab fa-github"></i> Source Code</a>
-            <button class="pact-btn demo" onclick="toggleScImg(this,'systemmonitor.png')"><i class="fas fa-images"></i> View UI</button>
-          </div>
-          <div class="sc-imgs hidden">
-            <img src="systemmonitor.png" alt="System Monitor UI">
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="sc-item">
-          <div class="sc-header">
-            <div class="sc-icon"><i class="fas fa-code"></i></div>
-            <div class="sc-meta">
-              <div class="sc-title">Mini C Compiler Framework</div>
-              <div class="sc-sub">Lightweight C language compiler with lexer, parser &amp; code generator</div>
-            </div>
-          </div>
-          <div class="sc-actions">
-            <a href="https://github.com/Tajbid-byte/Mini-C-Compiler-Framework" target="_blank" class="pact-btn github"><i class="fab fa-github"></i> Source Code</a>
-            <button class="pact-btn demo" onclick="toggleScImg(this,'compilerframe.png')"><i class="fas fa-images"></i> View UI</button>
-          </div>
-          <div class="sc-imgs hidden">
-            <img src="compilerframe.png" alt="Mini C Compiler UI">
-          </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="sc-item">
-          <div class="sc-header">
-            <div class="sc-icon"><i class="fas fa-database"></i></div>
-            <div class="sc-meta">
-              <div class="sc-title">Advanced E-Learning Database</div>
-              <div class="sc-sub">Full SQL-based e-learning platform with student &amp; admin portal</div>
-            </div>
-          </div>
-          <div class="sc-actions">
-            <a href="https://github.com/Tajbid-byte/Advanced-E-Learning-Database-SQL-Project" target="_blank" class="pact-btn github"><i class="fab fa-github"></i> Source Code</a>
-            <button class="pact-btn demo" onclick="toggleScImg(this,'elearning.png')"><i class="fas fa-images"></i> View UI</button>
-          </div>
-          <div class="sc-imgs hidden">
-            <img src="elearning.png" alt="E-Learning UI">
-          </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="sc-item">
-          <div class="sc-header">
-            <div class="sc-icon"><i class="fas fa-heartbeat"></i></div>
-            <div class="sc-meta">
-              <div class="sc-title">Vita-Care AI</div>
-              <div class="sc-sub">Comprehensive Mobile Healthcare Consultation Platform (Figma Design)</div>
-            </div>
-          </div>
-          <div class="sc-actions">
-            <a href="https://www.figma.com/design/9lj0IY6lhhuTBBriVrbHNm/Digital-Health-Consultation-Platform-AI-Intigrated?node-id=0-1&p=f" target="_blank" class="pact-btn demo"><i class="fab fa-figma"></i> View Figma Design</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-item"><div class="stats-n">07</div><div class="stats-l">Research Papers</div></div>
+    <div class="stats-item"><div class="stats-n">07</div><div class="stats-l">Live Deployments</div></div>
+    <div class="stats-item"><div class="stats-n">13</div><div class="stats-l">Showcase Apps</div></div>
+    <div class="stats-item"><div class="stats-n">+3</div><div class="stats-l">Years Research</div></div>
   </div>
+
+  <!-- TAB BAR -->
+  <div class="works-tabs">
+    <button class="wtab active" onclick="switchWorkTab('research',this)">
+      <i class="fas fa-rocket"></i> Live Research Deployments
+    </button>
+    <button class="wtab" onclick="switchWorkTab('showcase',this)">
+      <i class="fas fa-layer-group"></i> Showcase Projects
+    </button>
+    <button class="wtab" onclick="switchWorkTab('papers',this)">
+      <i class="fas fa-microscope"></i> Research Papers
+    </button>
+  </div>
+
+  <!-- ══════════ TAB 1: RESEARCH DEPLOYMENTS ══════════ -->
+  <div class="works-panel active" id="wp-research">
+
+    <!-- Scrolling ticker -->
+    <div class="ticker-section">
+      <div class="ticker-label"><i class="fas fa-circle" style="font-size:.45rem;animation:pulse 2s infinite"></i> Live</div>
+      <div class="ticker-scroll" id="research-ticker">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <div class="research-grid" id="research-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- ══════════ TAB 2: SHOWCASE PROJECTS ══════════ -->
+  <div class="works-panel" id="wp-showcase">
+
+    <div class="showcase-ticker ticker-section">
+      <div class="ticker-label"><i class="fas fa-layer-group" style="font-size:.65rem"></i> &nbsp;Apps</div>
+      <div class="ticker-scroll" id="showcase-ticker"></div>
+    </div>
+
+    <div class="showcase-grid" id="showcase-grid"></div>
+  </div>
+
+  <!-- ══════════ TAB 3: RESEARCH PAPERS ══════════ -->
+  <div class="works-panel" id="wp-papers">
+    <div class="paper-list" id="paper-list"></div>
+  </div>
+
 </section>
 
 <!-- ═══════════════ CONTACT ═══════════════ -->
@@ -1656,7 +1839,7 @@ footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══ STARS ═══ */
 (()=>{
   const c=document.getElementById('star-canvas'),ctx=c.getContext('2d');
@@ -1916,5 +2099,365 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+
+
+<script>
+/* ══════════════════════════════════════════
+   UPGRADED WORKS SECTION DATA + INTERACTION
+══════════════════════════════════════════ */
+/* ══ DATA ══ */
+const researchProjects = [
+  {
+    num:"01",
+    title:"Diabetic Retinopathy Screening",
+    sub:"Mitigating the Accuracy–Explainability Trade-Off in DR Screening Through CNN–CatBoost Stacking",
+    tags:["CNN","CatBoost","XAI","Medical Imaging","Stacking Ensemble"],
+    tech:"PyTorch · LIME · GradCAM",
+    link:"https://retinaai-phi.vercel.app/",
+    imgs:["diabetic.png"],
+    icon:"fas fa-eye"
+  },
+  {
+    num:"02",
+    title:"Brain Tumor Classification",
+    sub:"CAE-BrainNet: Statistically Validated Class-Adaptive Attention Ensemble for MRI Classification",
+    tags:["Attention Ensemble","MRI","XAI","Transfer Learning"],
+    tech:"PyTorch · GradCAM · Statistical Tests",
+    link:"https://caebrainnet.vercel.app/",
+    imgs:["brainnetimg1.png","brainnetimg2.png"],
+    icon:"fas fa-brain"
+  },
+  {
+    num:"03",
+    title:"Pneumonia Detection",
+    sub:"PneuXNet: Interpretable CNN Framework for High-Accuracy Pneumonia Detection Using Multi-Scale & Adaptive Attention",
+    tags:["Multi-Scale CNN","XAI","Chest X-Ray","Attention"],
+    tech:"PyTorch · SHAP · LIME",
+    link:"https://pneuxnet.vercel.app/",
+    imgs:["pneumoniaimg1.png","pneumoniaimg2.png"],
+    icon:"fas fa-lungs"
+  },
+  {
+    num:"04",
+    title:"Chronic Kidney Disease Prediction",
+    sub:"Machine Learning Approaches for Early Prediction of Chronic Kidney Disease and Its Progression",
+    tags:["ML","Early Prediction","Disease Progression","Clinical Data"],
+    tech:"Scikit-learn · SHAP · Feature Selection",
+    link:"https://ckd-net-gray.vercel.app/",
+    imgs:["kidneyimg1.png","kidneyimg2.png"],
+    icon:"fas fa-filter"
+  },
+  {
+    num:"05",
+    title:"Plant Disease Classification",
+    sub:"Deep Learning Ensemble with InceptionResNetV2, Meta-Learning & Explainable AI for Automated Classification",
+    tags:["InceptionResNetV2","Meta-Learning","XAI","Agriculture"],
+    tech:"TensorFlow · GradCAM · Meta-learning",
+    link:"https://plant-ai-classification.vercel.app/",
+    imgs:["plantimg1.png","plantimg2.png"],
+    icon:"fas fa-leaf"
+  },
+  {
+    num:"06",
+    title:"Vulnerability Detection — ExHyGLL",
+    sub:"Explainable Hybrid Graph Neural Networks & LLMs for Multi-Modal Code Vulnerability Detection",
+    tags:["GNN","LLM","CodeBERT","GATv2Conv","Security"],
+    tech:"PyTorch · HuggingFace · GATv2Conv",
+    link:"https://exhygll-ai.vercel.app/",
+    imgs:["vulnerimg1.png","vulnerimg2.png"],
+    icon:"fas fa-shield-alt"
+  },
+  {
+    num:"07",
+    title:"AquaGuard — Water Quality Monitor",
+    sub:"Edge-AI & IoT Based Real-Time Water Quality Monitoring and Pathogen Detection System",
+    tags:["Edge-AI","IoT","Real-Time","Pathogen Detection"],
+    tech:"TensorFlow Lite · IoT · Edge Deployment",
+    link:"https://aquaguard-ai-chi.vercel.app/",
+    imgs:["acquagaurd.png"],
+    icon:"fas fa-water"
+  }
+];
+
+const showcaseProjects = [
+  {
+    title:"AI Memory Agent",
+    sub:"Intelligent agent with persistent memory, context awareness and autonomous task execution",
+    tags:["AI Agent","Memory","LLM","Autonomous"],
+    link:"https://ai-memory-agent.vercel.app/",
+    imgs:["Aimemory.png"],
+    badge:"AI Agent"
+  },
+  {
+    title:"Interview Prep AI",
+    sub:"Personalized AI-powered interview preparation platform with real-time feedback and mock sessions",
+    tags:["LLM","Interview","NLP","RAG"],
+    link:"https://interview-prep-ai-xxdm.vercel.app/",
+    imgs:["intervewprep.png"],
+    badge:"AI Tool"
+  },
+  {
+    title:"Misinformation Detector",
+    sub:"Real-time AI system to detect and flag misinformation using NLP and fact-checking pipelines",
+    tags:["NLP","Fact-Check","BERT","Classification"],
+    link:"https://misinformation-detector1.vercel.app/",
+    imgs:["misinfor1.png","misinfor2.png"],
+    badge:"NLP"
+  },
+  {
+    title:"Professional Task Manager",
+    sub:"Full-featured task management platform with priority tracking, team collaboration and analytics",
+    tags:["Full-Stack","Next.js","PostgreSQL","Dashboard"],
+    link:"https://professional-task-manager-site.vercel.app/",
+    imgs:["taskmanager1.png","taskmanager2.png","taskmanager3.png","taskmanager4.png","taskmanager5.png"],
+    badge:"Full-Stack"
+  },
+  {
+    title:"RAG Chatbot",
+    sub:"Retrieval-Augmented Generation chatbot with custom knowledge base and semantic search",
+    tags:["RAG","LangChain","Vector DB","Chatbot"],
+    link:"https://rag-chatbotfinal-8i67.vercel.app/",
+    imgs:["ragchatbot.png"],
+    badge:"RAG"
+  },
+  {
+    title:"Code Architect AI",
+    sub:"Intelligent code generation and architecture design tool powered by LLMs with code review features",
+    tags:["LLM","Code Generation","AI","Code Review"],
+    link:"https://code-architect1.vercel.app/",
+    imgs:["code1.png","code2.png"],
+    badge:"Dev Tool"
+  },
+  {
+    title:"Medical Document Intelligence",
+    sub:"AI-powered platform for intelligent parsing, summarization and analysis of medical documents",
+    tags:["NLP","Medical AI","Document AI","Summarization"],
+    link:"https://medical-document-intelligence-final-mocha.vercel.app/",
+    imgs:["medicalai1.png","medicalai2.png"],
+    badge:"Medical AI"
+  },
+  {
+    title:"Shopify 3D Store",
+    sub:"Immersive 3D e-commerce experience with product visualization and interactive shopping features",
+    tags:["Three.js","3D","E-Commerce","WebGL"],
+    link:"https://shopify-3d-phi.vercel.app/",
+    imgs:["shop1.png","shop2.png","shop3.png","shop4.png"],
+    badge:"3D/Web"
+  },
+  {
+    title:"Food Delivery App",
+    sub:"Modern food delivery platform with real-time tracking, menu management and seamless ordering",
+    tags:["Full-Stack","React","Node.js","Real-Time"],
+    link:"https://foodapp-gold.vercel.app/menu/6",
+    imgs:["fooddeli1.png","fooddeli2.png","fooddeli3.png","fooddeli4.png"],
+    badge:"Full-Stack"
+  },
+  {
+    title:"Budget Tracking App",
+    sub:"Personal finance management & expense tracker with analytics and category-wise breakdowns",
+    tags:["Finance","React","Charts","Local Storage"],
+    link:"#",
+    gh:"https://github.com/Tajbid-byte/Budget-Tracking-App",
+    imgs:["Budget.jpg","Budget1.jpg"],
+    badge:"Web App"
+  },
+  {
+    title:"System Monitor Web App",
+    sub:"Real-time system resource monitoring dashboard with live CPU, RAM and network metrics",
+    tags:["Dashboard","Real-Time","Web","Monitoring"],
+    link:"#",
+    gh:"https://github.com/Tajbid-byte/System-Monitor-WebApp",
+    imgs:["systemmonitor.png"],
+    badge:"Dashboard"
+  },
+  {
+    title:"Mini C Compiler Framework",
+    sub:"Lightweight C language compiler with lexer, parser, semantic analysis and code generator",
+    tags:["Compiler","C","Systems","Lexer"],
+    link:"#",
+    gh:"https://github.com/Tajbid-byte/Mini-C-Compiler-Framework",
+    imgs:["compilerframe.png"],
+    badge:"Systems"
+  },
+  {
+    title:"Vita-Care AI — Digital Health Platform",
+    sub:"Comprehensive Mobile Healthcare Consultation Platform with AI integration, doctor booking and health tracking",
+    tags:["UI/UX","Figma","Healthcare","Mobile","AI"],
+    link:"https://www.figma.com/design/9lj0IY6lhhuTBBriVrbHNm/Digital-Health-Consultation-Platform-AI-Intigrated?node-id=0-1&p=f",
+    imgs:["figma.png"],
+    badge:"UI/UX Design",
+    isFigma:true
+  }
+];
+
+const papers = [
+  {n:"01",domain:"Diabetic Retinopathy",title:"Mitigating the Accuracy–Explainability Trade-Off in Diabetic Retinopathy Screening Through CNN–CatBoost Stacking",tags:["CNN","CatBoost","XAI","Medical"]},
+  {n:"02",domain:"Brain Tumor",title:"CAE-BrainNet: A Statistically Validated Class-Adaptive Attention Ensemble Model for Explainable Brain Tumor Classification from MRI",tags:["Attention","Ensemble","MRI","Explainability"]},
+  {n:"03",domain:"Pneumonia Detection",title:"PneuXNet: An Interpretable CNN Framework for High-Accuracy Pneumonia Detection Using Multi-Scale and Adaptive Attention",tags:["CNN","Multi-Scale","XAI","X-Ray"]},
+  {n:"04",domain:"Chronic Kidney Disease",title:"Machine Learning Approaches for Early Prediction of Chronic Kidney Disease and Its Progression",tags:["ML","Clinical","Early Detection","Progression"]},
+  {n:"05",domain:"Plant Disease",title:"Deep Learning-Based Ensemble Framework for Automated Plant Disease Classification: Integrating InceptionResNetV2 with Meta-Learning and Explainable AI",tags:["Ensemble","Meta-Learning","Agriculture","XAI"]},
+  {n:"06",domain:"Vulnerability Detection",title:"Explainable Hybrid Graph Neural Networks and Large Language Models for Vulnerability Detection: A Multi-Modal Code Understanding Approach",tags:["GNN","LLM","Security","Code Analysis"]},
+  {n:"07",domain:"AquaGuard",title:"An Edge-AI and IoT Based Real-Time Water Quality Monitoring and Pathogen Detection System",tags:["Edge-AI","IoT","Water Quality","Real-Time"]}
+];
+
+/* ══ BUILD RESEARCH TICKER ══ */
+function buildResearchTicker(){
+  const el = document.getElementById('research-ticker');
+  let html = '';
+  const doubled = [...researchProjects, ...researchProjects];
+  doubled.forEach(p => {
+    html += `<span class="tick-item">
+      <span class="dot"></span>
+      <span class="label">${p.title}</span>
+      <span class="tag-pill">LIVE</span>
+    </span>`;
+  });
+  el.innerHTML = html;
+}
+
+/* ══ BUILD SHOWCASE TICKER ══ */
+function buildShowcaseTicker(){
+  const el = document.getElementById('showcase-ticker');
+  let html = '';
+  const doubled = [...showcaseProjects, ...showcaseProjects];
+  doubled.forEach(p => {
+    html += `<span class="tick-item">
+      <span class="dot"></span>
+      <span class="label">${p.title}</span>
+      <span class="tag-pill">${p.badge}</span>
+    </span>`;
+  });
+  el.innerHTML = html;
+}
+
+/* ══ BUILD RESEARCH GRID ══ */
+function buildResearchGrid(){
+  const container = document.getElementById('research-grid');
+  container.innerHTML = researchProjects.map((p,idx) => {
+    const hasImgs = p.imgs && p.imgs.length > 0;
+    const imgHTML = hasImgs
+      ? p.imgs.map((img,i) => `<div class="slide${i===0?' active':''}" style="background-image:url('${img}')" data-idx="${i}"></div>`).join('')
+        + (p.imgs.length > 1 ? `<div class="slide-dots">${p.imgs.map((_,i)=>`<span class="sdot${i===0?' active':''}" onclick="goSlide(this,${idx},'r',${i})"></span>`).join('')}</div>` : '')
+        + `<div class="img-overlay"></div>`
+        + `<div class="rcard-badge"><span class="live-dot"></span> Live</div>`
+        + (p.imgs.length > 1 ? `<div class="img-counter">1/${p.imgs.length}</div>` : '')
+      : `<div class="placeholder-icon"><i class="${p.icon}"></i></div>`;
+
+    return `
+    <div class="rcard" data-ri="${idx}">
+      <div class="rcard-img ${!hasImgs?'no-img':''}" id="rimg-${idx}">${imgHTML}</div>
+      <div class="rcard-body">
+        <span class="rcard-num">Research — ${p.num}</span>
+        <h3 class="rcard-title">${p.title}</h3>
+        <p class="rcard-sub">${p.sub}</p>
+        <div class="rcard-tags">${p.tags.map(t=>`<span class="rtag">${t}</span>`).join('')}</div>
+        <div class="rcard-footer">
+          <div class="tech-stack"><i class="fas fa-microchip" style="font-size:.65rem;color:var(--dim)"></i> <span>${p.tech}</span></div>
+          <a href="${p.link}" target="_blank" class="live-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  startSlideshows('r', researchProjects);
+}
+
+/* ══ BUILD SHOWCASE GRID ══ */
+function buildShowcaseGrid(){
+  const container = document.getElementById('showcase-grid');
+  container.innerHTML = showcaseProjects.map((p,idx) => {
+    const hasImgs = p.imgs && p.imgs.length > 0;
+    const imgHTML = hasImgs
+      ? p.imgs.map((img,i) => `<div class="slide${i===0?' active':''}" style="background-image:url('${img}')" data-idx="${i}"></div>`).join('')
+        + (p.imgs.length > 1 ? `<div class="slide-dots">${p.imgs.map((_,i)=>`<span class="sdot${i===0?' active':''}" onclick="goSlide(this,${idx},'s',${i})"></span>`).join('')}</div>` : '')
+        + `<div class="img-overlay"></div>`
+        + `<div class="scard-badge">${p.badge}</div>`
+      : ``;
+
+    const liveHasLink = p.link && p.link !== '#';
+    const liveBtn = liveHasLink && !p.isFigma ? `<a href="${p.link}" target="_blank" class="live-btn-purple"><i class="fas fa-external-link-alt"></i> Live</a>` : '';
+    const figmaBtn = p.isFigma ? `<a href="${p.link}" target="_blank" class="live-btn-purple" style="background:linear-gradient(135deg,rgba(162,89,255,.2),rgba(29,233,182,.06));border-color:rgba(162,89,255,.4);color:#c084fc"><i class="fab fa-figma"></i> Figma Design</a>` : '';
+    const ghBtn = p.gh ? `<a href="${p.gh}" target="_blank" class="gh-btn"><i class="fab fa-github"></i> Code</a>` : '';
+
+    return `
+    <div class="scard" data-si="${idx}">
+      <div class="scard-img ${!hasImgs?'no-img':''}" id="simg-${idx}">${imgHTML}</div>
+      <div class="scard-body">
+        <h3 class="scard-title">${p.title}</h3>
+        <p class="scard-sub">${p.sub}</p>
+        <div class="scard-tags">${p.tags.map(t=>`<span class="stag">${t}</span>`).join('')}</div>
+        <div class="scard-footer">${ghBtn}${liveBtn}${figmaBtn}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  startSlideshows('s', showcaseProjects);
+}
+
+/* ══ BUILD PAPERS LIST ══ */
+function buildPapers(){
+  const container = document.getElementById('paper-list');
+  container.innerHTML = papers.map(p => `
+    <div class="paper-row">
+      <div class="paper-num">${p.n}</div>
+      <div class="paper-info">
+        <div class="paper-title"><strong>${p.domain}:</strong> ${p.title}</div>
+        <div class="paper-meta">${p.tags.map(t=>`<span class="paper-tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ══ SLIDESHOW ENGINE ══ */
+const slideTimers = {};
+function startSlideshows(type, projects){
+  projects.forEach((p, idx) => {
+    if(!p.imgs || p.imgs.length <= 1) return;
+    const key = `${type}-${idx}`;
+    if(slideTimers[key]) clearInterval(slideTimers[key]);
+    let cur = 0;
+    slideTimers[key] = setInterval(()=>{
+      cur = (cur + 1) % p.imgs.length;
+      updateSlide(type, idx, cur, p.imgs.length);
+    }, 3000 + idx * 200);
+  });
+}
+function updateSlide(type, idx, cur, total){
+  const container = document.getElementById(`${type}img-${idx}`);
+  if(!container) return;
+  container.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i===cur));
+  container.querySelectorAll('.sdot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+  const counter = container.querySelector('.img-counter');
+  if(counter) counter.textContent = `${cur+1}/${total}`;
+}
+function goSlide(dotEl, idx, type, targetIdx){
+  const p = type==='r' ? researchProjects[idx] : showcaseProjects[idx];
+  updateSlide(type, idx, targetIdx, p.imgs.length);
+  // reset timer
+  const key = `${type}-${idx}`;
+  if(slideTimers[key]) clearInterval(slideTimers[key]);
+  let cur = targetIdx;
+  slideTimers[key] = setInterval(()=>{
+    cur = (cur + 1) % p.imgs.length;
+    updateSlide(type, idx, cur, p.imgs.length);
+  }, 3000);
+}
+
+/* ══ TAB SWITCH ══ */
+function switchWorkTab(id, btn){
+  document.querySelectorAll('.works-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.wtab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('wp-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ══ INIT ══ */
+buildResearchTicker();
+buildShowcaseTicker();
+buildResearchGrid();
+buildShowcaseGrid();
+buildPapers();
+</script>
+
 </body>
 </html>
